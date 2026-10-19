@@ -454,7 +454,7 @@ class MABrowserCard extends HTMLElement {
         <div class="topbar"><div class="search-wrap">
           <span style="font-size:14px;color:var(--t3)">&#x2315;&#xFE0E;</span>
           <input class="search-inp" id="searchInp" type="text" placeholder="Search everything&hellip;" />
-          <button class="search-clear" id="searchClear">&#x2715;&#xFE0E;</button>
+          <button class="search-clear" id="searchClear" aria-label="Clear search"><svg width="14" height="14" viewBox="0 0 14 14" style="display:block"><path d="M2 2 L12 12 M12 2 L2 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
         </div></div>
         <div class="scroll" id="scroll"><div class="state-box"><div class="spinner"></div><span>Connecting&hellip;</span></div></div>
       </div>
@@ -1653,7 +1653,7 @@ class MABrowserCard extends HTMLElement {
     const title = (state == null ? void 0 : state.attributes.media_title) || "Queue", artist = (state == null ? void 0 : state.attributes.media_artist) || "";
     const queueArtStyle = artPath ? `background-image:url("${artPath}");background-size:cover;background-position:center;` : "";
     const queueArtContent = artPath ? "" : "&#9834;&#xFE0E;";
-    panel.innerHTML = `<div class="queue-header"><div class="queue-art" style="${queueArtStyle}">${queueArtContent}</div><div class="queue-title-wrap"><div class="queue-title" id="qTitle">${this._esc(title)}</div><div class="queue-subtitle" id="qSub">${this._esc(artist)}</div></div><button class="queue-close" id="qClose">&#x2715;&#xFE0E;</button></div><div class="queue-scroll" id="qScroll"><div class="state-box"><div class="spinner"></div></div></div>`;
+    panel.innerHTML = `<div class="queue-header"><div class="queue-art" style="${queueArtStyle}">${queueArtContent}</div><div class="queue-title-wrap"><div class="queue-title" id="qTitle">${this._esc(title)}</div><div class="queue-subtitle" id="qSub">${this._esc(artist)}</div></div><button class="queue-close" id="qClose" aria-label="Close queue"><svg width="18" height="18" viewBox="0 0 14 14" style="display:block"><path d="M2.5 2.5 L11.5 11.5 M11.5 2.5 L2.5 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div><div class="queue-scroll" id="qScroll"><div class="state-box"><div class="spinner"></div></div></div>`;
     card.appendChild(panel);
     panel.querySelector("#qClose").addEventListener("click", () => this._hideQueue());
     try {
