@@ -1,4 +1,4 @@
-try { if (typeof window !== "undefined") window.__MACARD_BUILD = "c70-svg-20261019b"; } catch (e) {}
+try { if (typeof window !== "undefined") window.__MACARD_BUILD = "c70-fix1-20261019"; } catch (e) {}
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -208,9 +208,9 @@ const CSS = `
   .album-card.now-playing .a-art-wrap { border-color:var(--gold); box-shadow:0 0 0 1px var(--gold); }
   .a-art-wrap { width:100%; aspect-ratio:1; border-radius:8px; background:var(--bg2); margin-bottom:6px; position:relative; overflow:hidden; border:1px solid var(--border); transition:transform .14s,border-color .14s; display:flex; align-items:center; justify-content:center; }
   .album-card:hover .a-art-wrap { transform:translateY(-2px); }
-  .a-art-wrap img { width:100%; height:100%; object-fit:cover; display:block; position:absolute; inset:0; }
+  .a-art-wrap img { width:100%; height:100%; object-fit:cover; display:block; position:absolute; left:0; top:0; right:0; bottom:0; }
   .a-art-wrap svg { flex-shrink:0; }
-  .a-overlay { position:absolute; inset:0; background:rgba(0,0,0,.52); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .14s; z-index:2; }
+  .a-overlay { position:absolute; left:0; top:0; right:0; bottom:0; background:rgba(0,0,0,.52); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .14s; z-index:2; }
   .album-card:hover .a-overlay { opacity:1; }
   .play-circle { width:36px; height:36px; background:var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#111; font-size:13px; transform:scale(.85); transition:transform .14s; }
   .album-card:hover .play-circle { transform:scale(1); }
@@ -249,7 +249,7 @@ const CSS = `
   /* TOAST */
   .toast { position:absolute; left:50%; bottom:70px; transform:translateX(-50%); background:var(--bg3); color:var(--t1); border:1px solid var(--gold-border); padding:8px 14px; border-radius:20px; font-size:12px; z-index:1000; box-shadow:0 4px 16px rgba(0,0,0,.5); max-width:80%; text-align:center; pointer-events:none; }
   /* QUEUE PANEL */
-  .queue-panel { position:absolute; inset:0; background:var(--bg-sidebar); display:flex; flex-direction:column; z-index:10; animation:slideUp .2s ease; }
+  .queue-panel { position:absolute; left:0; top:0; right:0; bottom:0; background:var(--bg-sidebar); display:flex; flex-direction:column; z-index:10; animation:slideUp .2s ease; }
   @keyframes slideUp { from { transform:translateY(20px); opacity:0; } to { transform:none; opacity:1; } }
   .queue-header { display:flex; align-items:center; gap:10px; padding:14px; border-bottom:1px solid var(--border); flex-shrink:0; }
   .queue-art { width:48px; height:48px; border-radius:7px; background:var(--bg3); overflow:hidden; flex-shrink:0; display:flex; align-items:center; justify-content:center; font-size:22px; }
@@ -257,7 +257,7 @@ const CSS = `
   .queue-title-wrap { flex:1; min-width:0; }
   .queue-title { font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .queue-subtitle { font-size:11px; color:var(--t3); margin-top:2px; }
-  .queue-close { background:none; border:none; color:var(--t2); font-size:18px; cursor:pointer; padding:4px; flex-shrink:0; border-radius:8px; background:rgba(128,128,128,0.35); min-width:26px; min-height:26px; }
+  .queue-close { background:none; border:none; color:var(--t2); font-size:18px; cursor:pointer; padding:4px; flex-shrink:0; }
   .queue-close:hover { color:var(--t1); }
   .queue-scroll { flex:1; overflow-y:auto; padding:8px; scrollbar-width:thin; scrollbar-color:var(--bg3) transparent; }
   .queue-item { display:flex; align-items:center; gap:9px; padding:7px 8px; border-radius:7px; cursor:pointer; transition:background .1s; }
@@ -597,7 +597,7 @@ class MABrowserCard extends HTMLElement {
   // no network request needed, always works regardless of ma_url accessibility.
   _loadMaLogo(el, mediaType) {
     if (!el || !el.isConnected) return;
-    el.innerHTML = `<svg width="100%" height="100%" style="display:block;position:absolute;inset:0;object-fit:cover;" preserveAspectRatio="xMidYMax meet" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M109.394 4.3814C115.242 -1.46047 124.788 -1.46047 130.606 4.3814L229.394 103.269C235.242 109.111 240 120.643 240 128.907V219.017L239.995 219.373C239.789 227.459 233.114 234.001 225 234.001H15C6.75759 234.001 2.40473e-05 227.22 0 218.987V128.877C0.000120331 120.613 4.78834 109.081 10.6064 103.239L109.394 4.3814Z" fill="#F2F4F9"/> <path d="M109.394 4.3814C115.242 -1.46047 124.788 -1.46047 130.606 4.3814L229.394 103.269C235.242 109.111 240 120.643 240 128.907V219.017L239.995 219.373C239.789 227.459 233.114 234.001 225 234.001H15C6.75759 234.001 2.40473e-05 227.22 0 218.987V128.877C0.000120331 120.613 4.78834 109.081 10.6064 103.239L109.394 4.3814ZM36 120.001C31.5817 120.001 28 123.582 28 128.001V206.001H44V128.001C44 123.582 40.4183 120.001 36 120.001ZM68 120.001C63.5817 120.001 60 123.582 60 128.001V206.001H76V128.001C76 123.582 72.4183 120.001 68 120.001ZM100 120.001C95.5817 120.001 92 123.582 92 128.001V206.001H108V128.001C108 123.582 104.418 120.001 100 120.001ZM158.393 120.427C154.2 119.032 149.671 121.3 148.275 125.492L121.479 206.001H138.342L163.456 130.544C164.851 126.352 162.584 121.823 158.393 120.427ZM188.708 125.492C187.313 121.3 182.783 119.032 178.591 120.427C174.399 121.823 172.131 126.352 173.526 130.544L198.642 206.001H215.504L188.708 125.492Z" fill="#18BCF2"/> </svg>`;
+    el.innerHTML = `<svg width="100%" height="100%" style="display:block;position:absolute;left:0;top:0;right:0;bottom:0;object-fit:cover;" preserveAspectRatio="xMidYMax meet" viewBox="0 0 240 240" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M109.394 4.3814C115.242 -1.46047 124.788 -1.46047 130.606 4.3814L229.394 103.269C235.242 109.111 240 120.643 240 128.907V219.017L239.995 219.373C239.789 227.459 233.114 234.001 225 234.001H15C6.75759 234.001 2.40473e-05 227.22 0 218.987V128.877C0.000120331 120.613 4.78834 109.081 10.6064 103.239L109.394 4.3814Z" fill="#F2F4F9"/> <path d="M109.394 4.3814C115.242 -1.46047 124.788 -1.46047 130.606 4.3814L229.394 103.269C235.242 109.111 240 120.643 240 128.907V219.017L239.995 219.373C239.789 227.459 233.114 234.001 225 234.001H15C6.75759 234.001 2.40473e-05 227.22 0 218.987V128.877C0.000120331 120.613 4.78834 109.081 10.6064 103.239L109.394 4.3814ZM36 120.001C31.5817 120.001 28 123.582 28 128.001V206.001H44V128.001C44 123.582 40.4183 120.001 36 120.001ZM68 120.001C63.5817 120.001 60 123.582 60 128.001V206.001H76V128.001C76 123.582 72.4183 120.001 68 120.001ZM100 120.001C95.5817 120.001 92 123.582 92 128.001V206.001H108V128.001C108 123.582 104.418 120.001 100 120.001ZM158.393 120.427C154.2 119.032 149.671 121.3 148.275 125.492L121.479 206.001H138.342L163.456 130.544C164.851 126.352 162.584 121.823 158.393 120.427ZM188.708 125.492C187.313 121.3 182.783 119.032 178.591 120.427C174.399 121.823 172.131 126.352 173.526 130.544L198.642 206.001H215.504L188.708 125.492Z" fill="#18BCF2"/> </svg>`;
   }
   async _loadImgInto(url, el, ph, maLogoType = null) {
     url = this._imageUrl(url);
@@ -1654,7 +1654,7 @@ class MABrowserCard extends HTMLElement {
     const title = (state == null ? void 0 : state.attributes.media_title) || "Queue", artist = (state == null ? void 0 : state.attributes.media_artist) || "";
     const queueArtStyle = artPath ? `background-image:url("${artPath}");background-size:cover;background-position:center;` : "";
     const queueArtContent = artPath ? "" : "&#9834;&#xFE0E;";
-    panel.innerHTML = `<div class="queue-header"><button class="queue-close" id="qClose" aria-label="Close queue">CLOSE</button><div class="queue-art" style="${queueArtStyle}">${queueArtContent}</div><div class="queue-title-wrap"><div class="queue-title" id="qTitle">${this._esc(title)}</div><div class="queue-subtitle" id="qSub">${this._esc(artist)}</div></div></div><div class="queue-scroll" id="qScroll"><div class="state-box"><div class="spinner"></div></div></div>`;
+    panel.innerHTML = `<div class="queue-header"><div class="queue-art" style="${queueArtStyle}">${queueArtContent}</div><div class="queue-title-wrap"><div class="queue-title" id="qTitle">${this._esc(title)}</div><div class="queue-subtitle" id="qSub">${this._esc(artist)}</div></div><button class="queue-close" id="qClose" aria-label="Close queue"><svg width="18" height="18" viewBox="0 0 14 14" style="display:block"><path d="M2.5 2.5 L11.5 11.5 M11.5 2.5 L2.5 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div><div class="queue-scroll" id="qScroll"><div class="state-box"><div class="spinner"></div></div></div>`;
     card.appendChild(panel);
     panel.querySelector("#qClose").addEventListener("click", () => this._hideQueue());
     try {
@@ -1885,7 +1885,7 @@ const EDITOR_CSS = `
   .toggle-hint{font-size:11px;color:var(--disabled-text-color);margin-top:1px;}
   .toggle-switch{position:relative;width:36px;height:20px;flex-shrink:0;}
   .toggle-switch input{opacity:0;width:0;height:0;}
-  .toggle-track{position:absolute;inset:0;background:var(--divider-color,#ccc);border-radius:10px;cursor:pointer;transition:background .2s;}
+  .toggle-track{position:absolute;left:0;top:0;right:0;bottom:0;background:var(--divider-color,#ccc);border-radius:10px;cursor:pointer;transition:background .2s;}
   .toggle-track::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:white;transition:transform .2s;box-shadow:0 1px 3px rgba(0,0,0,.3);}
   .toggle-switch input:checked+.toggle-track{background:var(--primary-color,#03a9f4);}
   .toggle-switch input:checked+.toggle-track::after{transform:translateX(16px);}
