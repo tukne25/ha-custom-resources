@@ -1,3 +1,4 @@
+try { if (typeof window !== "undefined") window.__MACARD_BUILD = "c70-svg-20261019b"; } catch (e) {}
 var __defProp = Object.defineProperty;
 var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
 var __publicField = (obj, key, value) => __defNormalProp(obj, typeof key !== "symbol" ? key + "" : key, value);
@@ -256,7 +257,7 @@ const CSS = `
   .queue-title-wrap { flex:1; min-width:0; }
   .queue-title { font-size:13px; font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
   .queue-subtitle { font-size:11px; color:var(--t3); margin-top:2px; }
-  .queue-close { background:none; border:none; color:var(--t2); font-size:18px; cursor:pointer; padding:4px; flex-shrink:0; }
+  .queue-close { background:none; border:none; color:var(--t2); font-size:18px; cursor:pointer; padding:4px; flex-shrink:0; border-radius:8px; background:rgba(128,128,128,0.35); min-width:26px; min-height:26px; }
   .queue-close:hover { color:var(--t1); }
   .queue-scroll { flex:1; overflow-y:auto; padding:8px; scrollbar-width:thin; scrollbar-color:var(--bg3) transparent; }
   .queue-item { display:flex; align-items:center; gap:9px; padding:7px 8px; border-radius:7px; cursor:pointer; transition:background .1s; }
