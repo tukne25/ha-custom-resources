@@ -1654,7 +1654,7 @@ class MABrowserCard extends HTMLElement {
     const title = (state == null ? void 0 : state.attributes.media_title) || "Queue", artist = (state == null ? void 0 : state.attributes.media_artist) || "";
     const queueArtStyle = artPath ? `background-image:url("${artPath}");background-size:cover;background-position:center;` : "";
     const queueArtContent = artPath ? "" : "&#9834;&#xFE0E;";
-    panel.innerHTML = `<div class="queue-header"><div class="queue-art" style="${queueArtStyle}">${queueArtContent}</div><div class="queue-title-wrap"><div class="queue-title" id="qTitle">${this._esc(title)}</div><div class="queue-subtitle" id="qSub">${this._esc(artist)}</div></div><button class="queue-close" id="qClose" aria-label="Close queue"><svg width="18" height="18" viewBox="0 0 14 14" style="display:block"><path d="M2.5 2.5 L11.5 11.5 M11.5 2.5 L2.5 11.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button></div><div class="queue-scroll" id="qScroll"><div class="state-box"><div class="spinner"></div></div></div>`;
+    panel.innerHTML = `<div class="queue-header"><button class="queue-close" id="qClose" aria-label="Close queue">CLOSE</button><div class="queue-art" style="${queueArtStyle}">${queueArtContent}</div><div class="queue-title-wrap"><div class="queue-title" id="qTitle">${this._esc(title)}</div><div class="queue-subtitle" id="qSub">${this._esc(artist)}</div></div></div><div class="queue-scroll" id="qScroll"><div class="state-box"><div class="spinner"></div></div></div>`;
     card.appendChild(panel);
     panel.querySelector("#qClose").addEventListener("click", () => this._hideQueue());
     try {
